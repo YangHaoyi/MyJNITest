@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.autoai.myjnitest"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                //指定版本
+                abiFilters 'armeabi'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            //CMakeLists目录
+            path "CMakeLists.txt"
+        }
+    }
+
+    repositories {
+        flatDir {
+            // aar目录
+            dirs 'libs'
+        }
+    }
+}
+
+//打包Jar包
+task makeJar(type:Jar){
+    delete 'build/libs/jnicore_v1.1.jar'
+    def srcClassDir =[project.buildDir.absolutePath + "/intermediates/javac/debug/compileDebugJavaWithJavac/classes"]
+    from srcClassDir
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+    include "com/autoai/"
+    extension = "jar"
+    archiveName = "jnavicore_v1.3.jar"
+}
+
+//打包so库
+task copylib(type: Copy) {
+    delete 'build/libs/libjnavicore.so'
+    from 'build/intermediates/cmake/debug/obj/armeabi/libmyjni.so'
+    into 'build/libs/'
+}
+
+makeJar.dependsOn(build)
+copylib.dependsOn(makeJar)
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    //通用样式aar
+    implementation(name: 'commonstylelibrary-1.01', ext: 'aar')
+    //单元测试相关
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

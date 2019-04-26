@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.autoai.client.MainActivity">
+
+    <TextView
+        android:id="@+id/tvGetMessageFromFirst"
+        style="@style/Common_Button"
+        android:text="从First获取"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorCutLine"/>
+    <TextView
+        android:id="@+id/tvGetMessageFromSecond"
+        style="@style/Common_Button"
+        android:text="从Second获取"/>
+
+</LinearLayout>
