@@ -7,16 +7,19 @@
  */
 #include <jni.h>
 #include "com_autoai_common.h"
+#include "second_ennu.h"
 
 #define REGISTER_CLASS "com/autoai/jni/SecondTest"
 
-#define UNUSED_VAR(o) ((o) = (o))
 
 JNIEXPORT jstring JNICALL nativeSecondPrint(JNIEnv *env, jclass clazz){
     UNUSED_VAR(clazz);
-    return env->NewStringUTF("JNI_______输出信息(from Second.cpp)");
+    return env->NewStringUTF(hello);
 }
 
+/**
+ * 定义一个JNINativeMethod数组，其中的成员就是Java代码中对应的native方法
+ * */
 static JNINativeMethod gMethods[] = {
         {"nativeSecondPrint","()Ljava/lang/String;",(void*)nativeSecondPrint}
 };
@@ -33,6 +36,10 @@ static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMet
     return JNI_TRUE;
 }
 
+
+/***
+ * 注册native方法
+ */
  int registerSecondNatives(JNIEnv *env){
     if(!registerNativeMethods(env,REGISTER_CLASS,gMethods, sizeof(gMethods)/ sizeof(gMethods[0]))){
         return JNI_FALSE;

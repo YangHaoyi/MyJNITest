@@ -13,6 +13,9 @@
 
 #endif //MYJNITEST_COM_AUTOAI_COMMON_H
 
+#define UNUSED_VAR(o) ((o) = (o))
+typedef wchar_t cqWCHAR;
+size_t cq_wcslen(const cqWCHAR* s);
 // 这个是自定义的LOG的标识
 #define TAG "myDemo-jni"
 //输出LogD

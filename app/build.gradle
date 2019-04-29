@@ -40,14 +40,15 @@ android {
 
 //打包Jar包
 task makeJar(type:Jar){
-    delete 'build/libs/jnicore_v1.1.jar'
+    delete 'build/libs/jni_v1.1.jar'
     def srcClassDir =[project.buildDir.absolutePath + "/intermediates/javac/debug/compileDebugJavaWithJavac/classes"]
     from srcClassDir
     exclude "**/R.class"
     exclude "**/R\$*.class"
-    include "com/autoai/"
+    include "com/autoai/jni"
     extension = "jar"
-    archiveName = "jnavicore_v1.3.jar"
+    //设置Jar包名称
+    archiveName = "jni_v1.1.jar"
 }
 
 //打包so库

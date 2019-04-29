@@ -5,6 +5,12 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+#添加对jniLibs下的文件引用
+include_directories(
+        src/main/jniLibs/${ANDROID_ABI}/include/
+)
+
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -20,6 +26,7 @@ add_library( # Sets the name of the library.
         src/main/jni/Register.cpp
         src/main/jni/First.cpp
         src/main/jni/Second.cpp
+        src/main/jni/CallBack.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

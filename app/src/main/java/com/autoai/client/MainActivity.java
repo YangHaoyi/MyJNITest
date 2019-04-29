@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.autoai.commonstylelibrary.view.dialog.CommonDialog;
+import com.autoai.jni.JniCallBack;
 import com.autoai.jni.JniUtils;
 import com.autoai.jni.SecondTest;
+import com.autoai.jni.bean.CallBackData;
+import com.autoai.jni.listener.JniEventListener;
 import com.autoai.myjnitest.R;
 
 /**
@@ -23,11 +26,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     /** 库文件名称 */
     private static final String JNI_LIB = "myjni";
-
     /** 从First.cpp获取字符串按钮 */
     private TextView tvGetMessageFromFirst;
     /** 从Second.cpp获取字符串按钮 */
     private TextView tvGetMessageFromSecond;
+    /** 模拟从CallBack.cpp发生回调 */
+    private TextView tvJniCallBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +51,29 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void initView(){
         tvGetMessageFromFirst = findViewById(R.id.tvGetMessageFromFirst);
         tvGetMessageFromSecond = findViewById(R.id.tvGetMessageFromSecond);
+        tvJniCallBack = findViewById(R.id.tvJniCallBack);
     }
 
     /** 初始化事件 */
     private void initEvent(){
         tvGetMessageFromFirst.setOnClickListener(this);
         tvGetMessageFromSecond.setOnClickListener(this);
+        tvJniCallBack.setOnClickListener(this);
+        JniCallBack.getInstance().addEventListener(new JniEventListener() {
+            @Override
+            public void onJniEvent(CallBackEvent event, Object data) {
+                switch (event){
+                    case Test_callBack:
+                        CallBackData callBackData = (CallBackData) data;
+                        Log.w("CallBack", "Jni=============CallBack"+callBackData.toString());
+                        break;
+                    case Test_otherEvent:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     /** 显示提示框 */
@@ -69,6 +90,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.tvGetMessageFromSecond:
                 showNoticeDialog(new SecondTest().printString());
+                break;
+            case R.id.tvJniCallBack:
+                JniCallBack.getInstance().doCallBack();
                 break;
             default:
                 break;
