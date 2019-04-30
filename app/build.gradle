@@ -45,7 +45,7 @@ task makeJar(type:Jar){
     from srcClassDir
     exclude "**/R.class"
     exclude "**/R\$*.class"
-    include "com/autoai/jni"
+    include "com/autoai/"
     extension = "jar"
     //设置Jar包名称
     archiveName = "jni_v1.1.jar"

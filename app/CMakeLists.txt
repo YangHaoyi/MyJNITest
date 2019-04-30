@@ -10,6 +10,18 @@ include_directories(
         src/main/jniLibs/${ANDROID_ABI}/include/
 )
 
+#配置cpp文件
+SET(SRC_LIST
+        src/main/jni/Register.cpp
+        src/main/jni/First.cpp
+        src/main/jni/Second.cpp
+        src/main/jni/CallBack.cpp
+    )
+
+#配置库文件
+SET(LIB_LIST
+        ${log-lib}
+   )
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -22,11 +34,7 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        #打包的cpp文件
-        src/main/jni/Register.cpp
-        src/main/jni/First.cpp
-        src/main/jni/Second.cpp
-        src/main/jni/CallBack.cpp
+        ${SRC_LIST}
         )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -51,8 +59,9 @@ target_link_libraries(
         myjni
         # Links the target library to the log library
         # included in the NDK.
-        ${log-lib})
+        ${LIB_LIST}
+        )
 
 add_definitions(
         -DDEBUG_LOG
-)
+        )

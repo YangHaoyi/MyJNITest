@@ -1,5 +1,7 @@
 package com.autoai.myjnitest;
 
+import com.autoai.jni.SecondTest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,8 +12,14 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+    /** 库文件名称 */
+    private static final String JNI_LIB = "myjni";
+
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+//        System.loadLibrary(JNI_LIB);
+//        String print = new SecondTest().printString();
+//        System.out.println("Start: "+print);
     }
 }
