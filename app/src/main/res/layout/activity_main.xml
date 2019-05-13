@@ -27,5 +27,13 @@
         android:id="@+id/tvJniCallBack"
         style="@style/Common_Button"
         android:text="模拟回调"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorCutLine"/>
+    <TextView
+        android:id="@+id/tvGetCarSpeed"
+        style="@style/Common_Button"
+        android:text="获取车速单位"/>
 
 </LinearLayout>

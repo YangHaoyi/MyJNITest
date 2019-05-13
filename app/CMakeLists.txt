@@ -16,6 +16,7 @@ SET(SRC_LIST
         src/main/jni/First.cpp
         src/main/jni/Second.cpp
         src/main/jni/CallBack.cpp
+        src/main/jni/CarSpeed.cpp
     )
 
 #配置库文件

@@ -22,6 +22,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
     assert(env != NULL);
     //注册
     registerSecondNatives(env);
+    registerCarSpeedNatives(env);
     registerNatives(env);
     registerCallBackNatives(env);
     result = JNI_VERSION_1_6;

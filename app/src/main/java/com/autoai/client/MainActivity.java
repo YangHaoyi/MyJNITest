@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.autoai.commonstylelibrary.view.dialog.CommonDialog;
+import com.autoai.jni.CarSpeedManager;
 import com.autoai.jni.JniCallBack;
 import com.autoai.jni.JniUtils;
 import com.autoai.jni.SecondTest;
@@ -32,6 +33,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView tvGetMessageFromSecond;
     /** 模拟从CallBack.cpp发生回调 */
     private TextView tvJniCallBack;
+    /** 从C端获取车速单位信息 */
+    private TextView tvGetCarSpeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tvGetMessageFromFirst = findViewById(R.id.tvGetMessageFromFirst);
         tvGetMessageFromSecond = findViewById(R.id.tvGetMessageFromSecond);
         tvJniCallBack = findViewById(R.id.tvJniCallBack);
+        tvGetCarSpeed = findViewById(R.id.tvGetCarSpeed);
     }
 
     /** 初始化事件 */
@@ -59,6 +63,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tvGetMessageFromFirst.setOnClickListener(this);
         tvGetMessageFromSecond.setOnClickListener(this);
         tvJniCallBack.setOnClickListener(this);
+        tvGetCarSpeed.setOnClickListener(this);
         JniCallBack.getInstance().addEventListener(new JniEventListener() {
             @Override
             public void onJniEvent(CallBackEvent event, Object data) {
@@ -93,6 +98,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.tvJniCallBack:
                 JniCallBack.getInstance().doCallBack();
+                break;
+            case R.id.tvGetCarSpeed:
+                showNoticeDialog("车速单位为："+CarSpeedManager.getInstance().getCarSpeed());
                 break;
             default:
                 break;

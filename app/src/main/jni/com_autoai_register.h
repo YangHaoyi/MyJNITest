@@ -18,5 +18,8 @@ int registerNatives(JNIEnv *env);
 //为Register调用Second注册提供
 int registerSecondNatives(JNIEnv *env);
 
+//为Register调用CarSpeed注册提供
+int registerCarSpeedNatives(JNIEnv *env);
+
 //为Register调用CallBack注册提供
 int registerCallBackNatives(JNIEnv *env);
