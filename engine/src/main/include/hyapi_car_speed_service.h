@@ -44,7 +44,6 @@ typedef enum SpeedUnit
         SpeedUnit speedUnit;
 
     };
-
 }
 
 

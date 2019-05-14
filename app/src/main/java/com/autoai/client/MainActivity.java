@@ -13,6 +13,7 @@ import com.autoai.jni.JniCallBack;
 import com.autoai.jni.JniUtils;
 import com.autoai.jni.SecondTest;
 import com.autoai.jni.bean.CallBackData;
+import com.autoai.jni.enu.CarSpeedUnitType;
 import com.autoai.jni.listener.JniEventListener;
 import com.autoai.myjnitest.R;
 
@@ -100,7 +101,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 JniCallBack.getInstance().doCallBack();
                 break;
             case R.id.tvGetCarSpeed:
-                showNoticeDialog("车速单位为："+CarSpeedManager.getInstance().getCarSpeed());
+                showNoticeDialog("车速单位为："+ CarSpeedUnitType.get(CarSpeedManager.getInstance().getCarSpeed()).getUnit());
                 break;
             default:
                 break;

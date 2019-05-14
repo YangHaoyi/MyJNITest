@@ -7,42 +7,28 @@ cmake_minimum_required(VERSION 3.4.1)
 
 #添加对jniLibs下的文件引用
 include_directories(
-        src/main/jniLibs/${ANDROID_ABI}/include/
+        src/main/include/
 )
-
 #配置cpp文件
 SET(SRC_LIST
-        src/main/jni/Register.cpp
-        src/main/jni/First.cpp
-        src/main/jni/Second.cpp
-        src/main/jni/CallBack.cpp
-        src/main/jni/CarSpeed.cpp
-    )
+        src/main/cpp/CarSpeed.cpp
+        )
 
 #配置库文件
 SET(LIB_LIST
-        hyapi_carspeed
         ${log-lib}
-   )
+        )
 
-link_directories(
-        src/main/jniLibs/${ANDROID_ABI}/lib
-)
-
-
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
-
+#生成静态库
 add_library( # Sets the name of the library.
         #库命名
-        myjni
-        # Sets the library as a shared library.
-        SHARED
+        static-lib
+        # Sets the library as a static library.
+        STATIC
         # Provides a relative path to your source file(s).
         ${SRC_LIST}
         )
+SET_TARGET_PROPERTIES(static-lib PROPERTIES OUTPUT_NAME "hyapi_carspeed")
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -63,12 +49,12 @@ find_library(
 
 target_link_libraries(
         # Specifies the target library.
-        myjni
+        static-lib
         # Links the target library to the log library
         # included in the NDK.
         ${LIB_LIST}
-        )
+)
 
 add_definitions(
         -DDEBUG_LOG
-        )
+)
