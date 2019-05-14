@@ -3,7 +3,7 @@ package com.autoai.jni.listener;
 /**
  * @author : YangHaoYi on  2019/4/2815:06.
  * Email  :  yang.haoyi@qq.com
- * Description :
+ * Description :JNI回调事件
  * Change : YangHaoYi on  2019/4/2815:06.
  * Version : V 1.0
  */

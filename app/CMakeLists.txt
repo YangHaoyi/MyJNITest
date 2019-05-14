@@ -13,10 +13,10 @@ include_directories(
 #配置cpp文件
 SET(SRC_LIST
         src/main/jni/Register.cpp
-        src/main/jni/First.cpp
-        src/main/jni/Second.cpp
+        src/main/jni/GetStringInJni.cpp
+        src/main/jni/GetStringInEngine.cpp
         src/main/jni/CallBack.cpp
-        src/main/jni/CarSpeed.cpp
+        src/main/jni/GetEnuInEngine.cpp
     )
 
 #配置库文件

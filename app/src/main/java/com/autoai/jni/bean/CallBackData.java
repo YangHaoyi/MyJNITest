@@ -9,8 +9,11 @@ package com.autoai.jni.bean;
  */
 public class CallBackData {
 
+    //名字
     private String name;
+    //ID
     private int id;
+    //号码
     private int number;
 
     public CallBackData() {

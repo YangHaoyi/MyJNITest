@@ -10,8 +10,10 @@ package com.autoai.jni.enu;
 public enum  CarSpeedUnitType {
 
     ERROR(-1,"出错"),
-    METRE(0,"米"),
-    KILOMETRE(1,"千米");
+    MM(0,"毫米"),
+    CM(1,"厘米"),
+    METRE(2,"米"),
+    KILOMETRE(3,"千米");
 
     private int code;
     private String unit;

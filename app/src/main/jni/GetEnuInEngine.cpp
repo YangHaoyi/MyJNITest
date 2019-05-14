@@ -1,38 +1,43 @@
 /**
  * @author : YangHaoYi on  2019/4/2610:40.
  * Email  :  yang.haoyi@qq.com
- * Description :First业务逻辑
+ * Description :从引擎库文件获取枚举
  * Change : YangHaoYi on  2019/4/2610:40.
  * Version : V 1.0
  */
 #include <jni.h>
-#include <assert.h>
-#include <cstdio>
-#include <android/log.h>
-#include "com_autoai_common.h"
-
 #define UNUSED_VAR(o) ((o) = (o))
-// 指定要注册的类
-#define REGISTER_CLASS "com/autoai/jni/JniUtils"
+#include "hyapi_car_speed_service.h"
+#define REGISTER_CLASS "com/autoai/jni/GetEnuInEngineManager"
 
-JNIEXPORT jstring JNICALL nativePrint(JNIEnv *env,jclass clazz){
-    UNUSED_VAR(clazz);
-    jstring outSring;
-    //使用宏判断
-    #if defined(DEBUG_LOG)
-        LOGD("这是Jni中的log");
-        outSring = env->NewStringUTF("JNI_______输出信息Debug(from First.cpp)");
-    #else
-        outSring = env->NewStringUTF("JNI_______输出信息Release(from First.cpp)");
-    #endif
-    return outSring;
+
+/**
+ * 获取车速枚举通过int返回
+ * @return 车速信息枚举
+ */
+static jint nativeGetCarSpeedUnit(JNIEnv *env, jclass thiz){
+    UNUSED_VAR(env);
+    UNUSED_VAR(thiz);
+    return HyApi::CarSpeedService::getInstance()->getSpeedUnit();
 }
+
+/**
+ * 设置车速枚举
+ * @param unit 长度单位
+ */
+static void nativeSetCarSpeedUnit(JNIEnv *env, jclass thiz,jint unit){
+    UNUSED_VAR(env);
+    UNUSED_VAR(thiz);
+    HYAPI_CAR_SPEED()->setSpeedUnit(static_cast<HyApi::SpeedUnit>(unit));
+}
+
 
 /**
  * 定义一个JNINativeMethod数组，其中的成员就是Java代码中对应的native方法
  * */
 static JNINativeMethod gMethods[] = {
-        {"nativePrint","()Ljava/lang/String;",(void*)nativePrint}
+        {"nativeGetCarSpeedUnit","()I",(void*)nativeGetCarSpeedUnit},
+        {"nativeSetCarSpeedUnit","(I)V",(void*)nativeSetCarSpeedUnit}
 };
 
 static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMethod* gMethods,int numMethods){
@@ -50,10 +55,9 @@ static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMet
 /***
  * 注册native方法
  */
-int registerNatives(JNIEnv* env) {
+int registerCarSpeedNatives(JNIEnv* env) {
     if (!registerNativeMethods(env, REGISTER_CLASS, gMethods, sizeof(gMethods) / sizeof(gMethods[0]))) {
         return JNI_FALSE;
     }
     return JNI_TRUE;
 }
-

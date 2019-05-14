@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">JNI示例</string>
+    <string name="app_get_string_in_jni">获取JNI中赋值字符串</string>
+    <string name="app_get_string_in_engine">获取引擎库中赋值字符串</string>
+    <string name="app_mock_callback">模拟执行回调</string>
+    <string name="app_get_enu_in_engine">获取车速单位</string>
+    <string name="app_car_speed_is">车速单位为：</string>
 </resources>

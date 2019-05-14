@@ -1,7 +1,7 @@
 /**
  * @author : YangHaoYi on  2019/4/2610:40.
  * Email  :  yang.haoyi@qq.com
- * Description :Second业务逻辑
+ * Description :从引擎库获取String
  * Change : YangHaoYi on  2019/4/2610:40.
  * Version : V 1.0
  */
@@ -9,10 +9,10 @@
 #include "com_autoai_common.h"
 #include "second_ennu.h"
 
-#define REGISTER_CLASS "com/autoai/jni/SecondTest"
+#define REGISTER_CLASS "com/autoai/jni/GetStringInEngineManager"
 
 
-JNIEXPORT jstring JNICALL nativeSecondPrint(JNIEnv *env, jclass clazz){
+JNIEXPORT jstring JNICALL nativeGetStringInEngine(JNIEnv *env, jclass clazz){
     UNUSED_VAR(clazz);
     return env->NewStringUTF(hello);
 }
@@ -21,7 +21,7 @@ JNIEXPORT jstring JNICALL nativeSecondPrint(JNIEnv *env, jclass clazz){
  * 定义一个JNINativeMethod数组，其中的成员就是Java代码中对应的native方法
  * */
 static JNINativeMethod gMethods[] = {
-        {"nativeSecondPrint","()Ljava/lang/String;",(void*)nativeSecondPrint}
+        {"nativeGetStringInEngine","()Ljava/lang/String;",(void*)nativeGetStringInEngine}
 };
 
 static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMethod* gMethods,int numMethods){

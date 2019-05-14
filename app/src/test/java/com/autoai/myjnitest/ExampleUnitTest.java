@@ -1,10 +1,6 @@
 package com.autoai.myjnitest;
 
-import com.autoai.jni.SecondTest;
-
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -19,7 +15,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
 //        System.loadLibrary(JNI_LIB);
-//        String print = new SecondTest().printString();
+//        String print = new GetStringInEngineManager().printString();
 //        System.out.println("Start: "+print);
     }
 }

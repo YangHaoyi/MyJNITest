@@ -13,6 +13,8 @@ namespace HyApi{
 
 typedef enum SpeedUnit
 {
+  MM,
+  CM,
   METRE,
   KILOMETRE
 } SpeedUnit;

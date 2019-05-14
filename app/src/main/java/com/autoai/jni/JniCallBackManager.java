@@ -9,14 +9,27 @@ import com.autoai.jni.listener.JniEventListener;
  * Change : YangHaoYi on  2019/4/2616:55.
  * Version : V 1.0
  */
-public class JniCallBack {
+public class JniCallBackManager {
 
-    /** 单例 */
-    private static final JniCallBack instance = new JniCallBack();
+    /** 单例  对保存实例的变量添加volatile的修饰 */
+    private volatile static JniCallBackManager instance = null;
 
-    /** 单例 */
-    public static JniCallBack getInstance() {
+    /** 获取单例 */
+    public static JniCallBackManager getInstance() {
+        //先检查实例是否存在，如果不存在才进入下面的同步块
+        if(instance == null){
+            //同步块，线程安全的创建实例
+            synchronized (JniCallBackManager.class){
+                //再次检查实例是否存在，如果不存在才真的创建实例
+                if(instance == null){
+                    instance = new JniCallBackManager();
+                }
+            }
+        }
         return instance;
+    }
+
+    private JniCallBackManager() {
     }
 
     /** Java回调接口 */

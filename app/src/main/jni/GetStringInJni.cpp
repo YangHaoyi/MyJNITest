@@ -1,32 +1,38 @@
 /**
  * @author : YangHaoYi on  2019/4/2610:40.
  * Email  :  yang.haoyi@qq.com
- * Description :CarSpeed业务逻辑
+ * Description :从JNI获取String
  * Change : YangHaoYi on  2019/4/2610:40.
  * Version : V 1.0
  */
 #include <jni.h>
+#include <assert.h>
+#include <cstdio>
+#include <android/log.h>
+#include "com_autoai_common.h"
+
 #define UNUSED_VAR(o) ((o) = (o))
-#include "hyapi_car_speed_service.h"
-#define REGISTER_CLASS "com/autoai/jni/CarSpeedManager"
+// 指定要注册的类
+#define REGISTER_CLASS "com/autoai/jni/GetStringInJniManager"
 
-
-/**
- * 获取车速
- */
-static jint nativeGetCarSpeedUnit(JNIEnv *env, jclass thiz){
-    UNUSED_VAR(env);
-    UNUSED_VAR(thiz);
-//    CARSPEED_SERVICE->setSpeedUnit(static_cast<HyApi::SpeedUnit>(1));
-    HyApi::CarSpeedService::getInstance()->setSpeedUnit(static_cast<HyApi::SpeedUnit>(1));
-    return HyApi::CarSpeedService::getInstance()->getSpeedUnit();
+JNIEXPORT jstring JNICALL nativeGetStringInJNI(JNIEnv *env,jclass clazz){
+    UNUSED_VAR(clazz);
+    jstring outSring;
+    //使用宏判断
+    #if defined(DEBUG_LOG)
+        LOGD("这是Jni中的log");
+        outSring = env->NewStringUTF("JNI赋值信息Debug(from GetStringInJni.cpp)");
+    #else
+        outSring = env->NewStringUTF("JNI赋值信息Release(from GetStringInJni.cpp)");
+    #endif
+    return outSring;
 }
 
 /**
  * 定义一个JNINativeMethod数组，其中的成员就是Java代码中对应的native方法
  * */
 static JNINativeMethod gMethods[] = {
-        {"nativeGetCarSpeedUnit","()I",(void*)nativeGetCarSpeedUnit}
+        {"nativeGetStringInJNI","()Ljava/lang/String;",(void*)nativeGetStringInJNI}
 };
 
 static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMethod* gMethods,int numMethods){
@@ -44,9 +50,10 @@ static int registerNativeMethods(JNIEnv *env, const char* className,JNINativeMet
 /***
  * 注册native方法
  */
-int registerCarSpeedNatives(JNIEnv* env) {
+int registerNatives(JNIEnv* env) {
     if (!registerNativeMethods(env, REGISTER_CLASS, gMethods, sizeof(gMethods) / sizeof(gMethods[0]))) {
         return JNI_FALSE;
     }
     return JNI_TRUE;
 }
+

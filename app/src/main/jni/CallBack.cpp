@@ -9,7 +9,7 @@
 #include <jni.h>
 #include "com_autoai_common.h"
 
-#define REGISTER_CLASS "com/autoai/jni/JniCallBack"
+#define REGISTER_CLASS "com/autoai/jni/JniCallBackManager"
 
 typedef struct Mbapi2ClientEventJNI {
     jobject initEventCBClass;
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL nativeCallBack(JNIEnv *env, jclass clazz){
 
 /**  注册  **/
 static JNINativeMethod gMethods[] = {
-        {"nativeAddEventListener",    "(Lcom/autoai/jni/JniCallBack$TransferJniEventListener;)V", (void *) nativeAddEventListener},
+        {"nativeAddEventListener",    "(Lcom/autoai/jni/JniCallBackManager$TransferJniEventListener;)V", (void *) nativeAddEventListener},
         {"nativeCallBack","()V",(void*)nativeCallBack}
 };
 

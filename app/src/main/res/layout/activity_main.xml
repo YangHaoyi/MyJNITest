@@ -8,17 +8,17 @@
     tools:context="com.autoai.client.MainActivity">
 
     <TextView
-        android:id="@+id/tvGetMessageFromFirst"
+        android:id="@+id/tvGetMessageFromJNI"
         style="@style/Common_Button"
-        android:text="从First获取"/>
+        android:text="@string/app_get_string_in_jni"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorCutLine"/>
     <TextView
-        android:id="@+id/tvGetMessageFromSecond"
+        android:id="@+id/tvGetMessageFromEngine"
         style="@style/Common_Button"
-        android:text="从Second获取"/>
+        android:text="@string/app_get_string_in_engine"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/tvJniCallBack"
         style="@style/Common_Button"
-        android:text="模拟回调"/>
+        android:text="@string/app_mock_callback"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -34,6 +34,6 @@
     <TextView
         android:id="@+id/tvGetCarSpeed"
         style="@style/Common_Button"
-        android:text="获取车速单位"/>
+        android:text="@string/app_get_enu_in_engine"/>
 
 </LinearLayout>

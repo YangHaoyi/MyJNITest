@@ -13,11 +13,13 @@ namespace HyApi{
 
 typedef enum SpeedUnit
 {
+  MM,
+  CM,
   METRE,
   KILOMETRE
 } SpeedUnit;
 
-#define CARSPEED_SERVICE() HyApi::CarSpeedService::getInstance()
+#define HYAPI_CAR_SPEED() HyApi::CarSpeedService::getInstance()
 
 
 
